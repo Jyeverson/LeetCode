@@ -2,10 +2,22 @@ package JAVA;
 
 public class AddBinary {
     public String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+        int i = a.length() - 1;
+        int j = b.length() - 1;
 
-        int number0 = Integer.parseInt(a, 2);
-        int number1 = Integer.parseInt(b, 2);
+        while (i >= 0 || j >= 0 || carry > 0) {
+            int bitA = (i >= 0) ? Character.getNumericValue(a.charAt(i)) : 0;
+            int bitB = (j >= 0) ? Character.getNumericValue(b.charAt(j)) : 0;
+            int sum = bitA + bitB + carry;
 
-        return Integer.toBinaryString(number0 + number1);
+            result.insert(0, sum % 2);
+            carry = sum / 2;
+
+            i--;
+            j--;
+        }
+        return result.toString();
     }
 }
